@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<launch>
+  <param name="sim" value="false" type="bool"/>
+  <!-- Free space include -->
+  <!-- <include file="$(find free_space_detection)/launch/free_space.launch"/> -->
+  <!-- <group ns="/pcp/fus/planar_pc"> -->
+  <!-- <remap from="/pointcloud0" to="/pc_out_pointcloud"/> -->
+  <!-- <remap from="/tf" to="/trf/frames"/> -->
+  <!-- <remap from="/tracking_frame" to="/atc/laser/center_top_roof"/> -->
+  <!-- <remap from="/tracking_frame" to="/tracking_frame1"/> -->
+  <!-- <remap from="/pc_out" to="/pcp/fus/planar_pc/points"/> -->
+  <!-- <node name="planar_pc" pkg="mtt" type="planar_pc_generator" required="true" output="screen"> -->
+  <!-- <param name="output_frequency" value="10.0"/> -->
+  <!-- <param name="perpendicular_treshold" value="0.05"/> -->
+  <!-- </node> -->
+  <!-- </group> -->
+  <!-- <group ns="/pcp/track/mtt"> -->
+  <!-- <remap from="/mtt/points" to="/planar_pc_generator/planar_pc"/> -->
+  <!-- <node name="node" pkg="mtt" type="line_fitting" required="true" output="screen"> -->
+  <!-- <remap from="/points" to="/pcp/fus/planar_pc/points"/> -->
+  <!-- <remap from="/markers" to="/pcp/trck/mtt/markers"/> -->
+  <!-- <remap from="/marker" to="/pcp/trck/mtt/marker"/> -->
+  <!-- <remap from="/targets" to="/mtt/trck/targets"/> -->
+  <!-- <param name="/scan" value="/planar_pc_generator/planar_pc"/> -->
+  <!-- </node> -->
+  <!-- </group> -->
+  <node name="trajectory_planner_nodelet" pkg="trajectory_planner" type="trajectory_planner_nodelet" required="true" output="screen">
+    <!-- <remap from="/mtt_targets" to="/mtt/trck/targets"/> -->
+  </node>
+  <!--<node name="traj_executor" pkg="trajectory_planner" type="trajectory_executive" required="true" output="screen"/>-->
+  <!--<param name="/use_sim_time" type="bool" value="true" />-->
+  <node name="APwaypoints" pkg="trajectory_planner" type="APwaypoints" required="true" output="screen"/>
+    <include file="$(find free_space_detection)/launch/robotmodel.launch"/>
+  <!-- <node name="mtt_target_generator" pkg="trajectory_planner" type="mtt_target_generator" required="true" output="screen"> -->
+  <!-- <remap from="/mtt_targets" to="/mtt/trck/targets"/> -->
+  <!-- </node> -->
+  <!-- <node name="tf_generator" pkg="trajectory_planner" type="tf_generator" />
+  <node name="tf_generator2" pkg="trajectory_planner" type="tf_generator2" /> -->
+  <!-- <node name="tracking_frame_generator" pkg="trajectory_planner" type="tracking_frame_generator" required="true" output="screen"/> -->
+  <!-- <node name="rviz" pkg="rviz" type="rviz" args="-display-config $(find trajectory_planner)/config/rviz.rviz" required="true"/> -->
+  <!--<node name="rviz" pkg="rviz" type="rviz" /> -->
+</launch>

@@ -1,0 +1,146 @@
+capture_directory: ~
+fixed_frame: map
+target_frame: base_link_imu
+fix_orientation: false
+rotate_90: true
+enable_antialiasing: true
+show_displays: true
+show_status_bar: true
+show_capture_tools: true
+window_width: 1639
+window_height: 998
+view_scale: 0.109569
+offset_x: 31.22992
+offset_y: -24.67284
+use_latest_transforms: true
+background: "#a0a0a4"
+displays:
+  - type: mapviz_plugins/tile_map
+    name: Google Maps
+    config:
+      visible: true
+      collapsed: true
+      custom_sources:
+        - base_url: http://localhost:8080/wmts/gm_layer/gm_grid/{level}/{x}/{y}.png
+          max_zoom: 19
+          name: Google Maps
+          type: wmts
+      bing_api_key: ""
+      source: Google Maps
+  - type: mapviz_plugins/robot_image
+    name: new display
+    config:
+      visible: true
+      collapsed: true
+      frame: base_link_imu
+      image: /home/atlascar2/atlascar2__icon.png
+      width: 5
+      height: 3
+      ratio: custom
+  - type: mapviz_plugins/bestpos
+    name: position GNSS+INS
+    config:
+      visible: true
+      collapsed: true
+      topic: /bestpos
+      color: "#0000ff"
+      draw_style: points
+      position_tolerance: 0
+      buffer_size: 0
+      show_laps: false
+      static_arrow_sizes: false
+      arrow_size: 1
+  - type: mapviz_plugins/bestgnsspos
+    name: position GNSS
+    config:
+      visible: true
+      collapsed: true
+      topic: /bestgnsspos
+      color: "#00ff7f"
+      draw_style: points
+      position_tolerance: 0
+      buffer_size: 0
+      show_laps: false
+      static_arrow_sizes: false
+      arrow_size: 25
+  - type: mapviz_plugins/point_click_publisher
+    name: destination
+    config:
+      visible: true
+      collapsed: true
+      topic: /destination
+      output_frame: /wgs84
+  - type: mapviz_plugins/global_planning
+    name: waypoints_full
+    config:
+      visible: true
+      collapsed: true
+      topic: /waypoints_full
+      color: "#000000"
+      draw_style: lines
+      position_tolerance: 0
+      buffer_size: 0
+      show_laps: false
+      static_arrow_sizes: false
+      arrow_size: 1
+  - type: mapviz_plugins/global_planning
+    name: way_prev_next
+    config:
+      visible: true
+      collapsed: true
+      topic: /waypoints_previous_next_wsg84
+      color: "#ff0000"
+      draw_style: points
+      position_tolerance: 0
+      buffer_size: 2
+      show_laps: false
+      static_arrow_sizes: false
+      arrow_size: 25
+  - type: mapviz_plugins/image
+    name: point_grey
+    config:
+      visible: true
+      collapsed: true
+      topic: /camera/image_color
+      anchor: top left
+      units: percent
+      offset_x: 0
+      offset_y: 0
+      width: 39.4
+      height: 36
+      keep_ratio: false
+      image_transport: default
+  - type: mapviz_plugins/pointcloud2
+    name: new display
+    config:
+      visible: true
+      collapsed: true
+      topic: /merged_pcl
+      size: 3
+      buffer_size: 1
+      alpha: 1
+      color_transformer: x
+      min_color: "#ffffff"
+      max_color: "#000000"
+      value_min: -3
+      value_max: 100
+      use_rainbow: true
+      use_automaxmin: true
+      unpack_rgb: false
+  - type: mapviz_plugins/pointcloud2
+    name: new display
+    config:
+      visible: true
+      collapsed: false
+      topic: /cloud_simple
+      size: 3
+      buffer_size: 1
+      alpha: 1
+      color_transformer: Flat Color
+      min_color: "#ffffff"
+      max_color: "#000000"
+      value_min: 0
+      value_max: 100
+      use_rainbow: true
+      use_automaxmin: false
+      unpack_rgb: false
